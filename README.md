@@ -10,83 +10,236 @@ This is the main dashboard where users can select and launch different analysis 
 
 ## Quick Start
 
-```bash
+## Running on Windows (Step-by-Step Setup Guide)
+
+The instructions below are intended for users running the tools on a Windows computer. These steps assume Python and Git are not already installed.
+
+### Step 1: Install Python
+
+Download Python:
+
+https://www.python.org/downloads/
+
+During installation, make sure to check:
+
+```text
+Add python.exe to PATH
+```
+
+After installation, open **Command Prompt** and verify:
+
+```cmd
+python --version
+```
+
+You should see a Python version number.
+
+---
+
+### Step 2: Install Git
+
+Download Git:
+
+https://git-scm.com/download/win
+
+After installation, verify:
+
+```cmd
+git --version
+```
+
+---
+
+### Step 3: Create a workspace folder
+
+Open **Command Prompt** and run:
+
+```cmd
+cd %USERPROFILE%
+mkdir alfalfa-tools
+cd alfalfa-tools
+```
+
+---
+
+### Step 4: Clone all repositories
+
+Run:
+
+```cmd
+git clone https://github.com/USDA-MNSU-CS-PROJECTS/segmentation-Fall2025.git
+git clone https://github.com/USDA-MNSU-CS-PROJECTS/object-detection-Fall2025.git
+git clone https://github.com/USDA-MNSU-CS-PROJECTS/segmentation-Spring2026.git
 git clone https://github.com/USDA-MNSU-CS-PROJECTS/Alfalfa-Unified-UI.git
-cd Alfalfa-Unified-UI
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-PORT=7863 python3 app.py
 ```
 
-Then open <http://127.0.0.1:7863>. Tool cards will show **Offline** until each individual tool is started in its own repository — see [Running All Tools](#running-all-tools).
+---
 
-## Repository Structure
+### Step 5: Install dependencies
 
-- `app.py` — Main Gradio application that provides the unified dashboard.
-- `requirements.txt` — Contains only the dependencies required to run the unified UI.
-- `start_all.sh` — Helper script to launch all related tools and the unified UI together.
-- `docs/architecture.md` — Describes system design decisions and how the unified UI interacts with other tools.
-- `assets/` — Contains images and documentation assets (e.g., UI screenshots).
+Each repository uses its own virtual environment.
 
-## Integrated Tools
+#### Fall 2025 Segmentation
 
-### Object Detection — Fall 2025
-- Detects stem/object regions
-- Runs on port `7861`
-
-### Segmentation — Fall 2025
-- Performs earlier segmentation workflows
-- Runs on port `7860`
-
-### Segmentation & Ratio Analysis — Spring 2026
-- Performs tissue segmentation and cross-section ratio analysis
-- Runs on port `7862`
-
-Each tool runs independently in its own repository. This unified UI does not contain model code.
-
-## How the Unified UI Works
-
-- The UI acts as a launcher.
-- It checks whether each tool is running locally.
-- It provides quick access to each tool via buttons.
-- It does not run models itself.
-
-## Setup
-
-```bash
-git clone <repo>
-cd Alfalfa-Unified-UI
-python3 -m venv .venv
-source .venv/bin/activate
+```cmd
+cd %USERPROFILE%\alfalfa-tools\segmentation-Fall2025
+python -m venv .venv
+.venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Running the Unified UI
+#### Object Detection
 
-```bash
-PORT=7863 python3 app.py
+Open another Command Prompt window:
+
+```cmd
+cd %USERPROFILE%\alfalfa-tools\object-detection-Fall2025
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-Then open:
+#### Spring 2026 Segmentation
 
-<http://127.0.0.1:7863>
+Open another Command Prompt window:
 
-## Running All Tools
+```cmd
+cd %USERPROFILE%\alfalfa-tools\segmentation-Spring2026
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-Users must start each tool separately before using the unified UI.
+#### Unified UI
 
-- Start Fall 2025 Segmentation → port `7860`
-- Start Object Detection → port `7861`
-- Start Spring 2026 Segmentation → port `7862`
-- Start Unified UI → port `7863`
+Open another Command Prompt window:
 
-## Tool Status
+```cmd
+cd %USERPROFILE%\alfalfa-tools\Alfalfa-Unified-UI
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-- **Online** — tool is running and reachable
-- **Offline** — tool is not currently running
+---
 
-Offline means the individual tool is not currently running on its expected local port.
+### Step 6: Start all tools
 
+The Unified UI expects the three tools below to be running.
+
+Open **four Command Prompt windows**.
+
+Tip:
+
+Press:
+
+```text
+Windows Key → type "cmd" → press Enter
+```
+
+Repeat four times.
+
+---
+
+#### Window 1: Fall 2025 Segmentation
+
+```cmd
+cd %USERPROFILE%\alfalfa-tools\segmentation-Fall2025
+.venv\Scripts\activate
+set PORT=7860
+python app.py
+```
+
+---
+
+#### Window 2: Object Detection
+
+```cmd
+cd %USERPROFILE%\alfalfa-tools\object-detection-Fall2025
+.venv\Scripts\activate
+set PORT=7861
+python app.py
+```
+
+---
+
+#### Window 3: Spring 2026 Segmentation
+
+```cmd
+cd %USERPROFILE%\alfalfa-tools\segmentation-Spring2026
+.venv\Scripts\activate
+set PORT=7862
+python app.py
+```
+
+---
+
+#### Window 4: Unified UI
+
+```cmd
+cd %USERPROFILE%\alfalfa-tools\Alfalfa-Unified-UI
+.venv\Scripts\activate
+set PORT=7863
+python app.py
+```
+
+Open:
+
+```text
+http://127.0.0.1:7863
+```
+
+---
+
+### Step 7: Verify the Unified UI
+
+After opening the Unified UI:
+
+1. Click **Refresh Status**
+2. Confirm all tools display **Online**
+3. Open the desired tool from the dashboard
+
+---
+
+### Common Issues
+
+#### Python is not recognized
+
+If Windows reports:
+
+```text
+python is not recognized
+```
+
+Python was likely installed without enabling PATH. Reinstall Python and enable:
+
+```text
+Add python.exe to PATH
+```
+
+---
+
+#### Tool appears Offline
+
+Make sure the corresponding tool is running:
+
+```text
+Fall 2025 Segmentation → 7860
+Object Detection → 7861
+Spring 2026 Segmentation → 7862
+Unified UI → 7863
+```
+
+Then click **Refresh Status**.
+
+---
+
+
+---
+
+### Future Deployment Note
+
+For long-term use, these tools can also be hosted on a centralized server or USDA computing environment. Once hosted, users would only need to access a web link instead of starting all applications locally.
 ## Configuration
 
 The following environment variables override the default tool URLs without editing code:
