@@ -10,11 +10,13 @@ This is the main dashboard where users can select and launch different analysis 
 
 ## Quick Start
 
-## Running on Windows (Step-by-Step Setup Guide)
+# Windows Setup Guide
 
-The instructions below are intended for users running the tools on a Windows computer. These steps assume Python and Git are not already installed.
+These instructions are intended for Windows users running the tools locally for the first time. The paths below use the example Windows username `rusch051` (used during client setup/testing). If your Windows username is different, simply replace `rusch051` with your own username in the paths.
 
-### Step 1: Install Python
+---
+
+## Step 1: Install Python
 
 Download Python:
 
@@ -36,7 +38,7 @@ You should see a Python version number.
 
 ---
 
-### Step 2: Install Git
+## Step 2: Install Git
 
 Download Git:
 
@@ -50,21 +52,21 @@ git --version
 
 ---
 
-### Step 3: Create a workspace folder
+## Step 3: Create Workspace Folder
 
 Open **Command Prompt** and run:
 
 ```cmd
-cd %USERPROFILE%
+cd C:\Users\rusch051
 mkdir alfalfa-tools
 cd alfalfa-tools
 ```
 
 ---
 
-### Step 4: Clone all repositories
+## Step 4: Clone All Repositories
 
-Run:
+Copy and paste the commands below one at a time:
 
 ```cmd
 git clone https://github.com/USDA-MNSU-CS-PROJECTS/segmentation-Fall2025.git
@@ -73,63 +75,81 @@ git clone https://github.com/USDA-MNSU-CS-PROJECTS/segmentation-Spring2026.git
 git clone https://github.com/USDA-MNSU-CS-PROJECTS/Alfalfa-Unified-UI.git
 ```
 
----
+After cloning, all repositories should now exist inside:
 
-### Step 5: Install dependencies
-
-Each repository uses its own virtual environment.
-
-#### Fall 2025 Segmentation
-
-```cmd
-cd %USERPROFILE%\alfalfa-tools\segmentation-Fall2025
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-#### Object Detection
-
-Open another Command Prompt window:
-
-```cmd
-cd %USERPROFILE%\alfalfa-tools\object-detection-Fall2025
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-#### Spring 2026 Segmentation
-
-Open another Command Prompt window:
-
-```cmd
-cd %USERPROFILE%\alfalfa-tools\segmentation-Spring2026
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-#### Unified UI
-
-Open another Command Prompt window:
-
-```cmd
-cd %USERPROFILE%\alfalfa-tools\Alfalfa-Unified-UI
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+```text
+C:\Users\rusch051\alfalfa-tools
 ```
 
 ---
 
-### Step 6: Start all tools
+# First-Time Setup
 
-The Unified UI expects the three tools below to be running.
+Each repository uses its own Python virtual environment.
 
-Open **four Command Prompt windows**.
+You only need to complete this section once.
 
-Tip:
+---
+
+## Fall 2025 Segmentation
+
+```cmd
+cd C:\Users\rusch051\alfalfa-tools\segmentation-Fall2025
+python -m venv .venv
+.venv\Scripts\activate
+pip install gradio ultralytics pandas openpyxl pillow
+```
+
+---
+
+## Object Detection — Fall 2025
+
+Open a new Command Prompt window and run:
+
+```cmd
+cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r src\app\requirements.txt
+```
+
+---
+
+## Spring 2026 Segmentation
+
+Open another Command Prompt window and run:
+
+```cmd
+cd C:\Users\rusch051\alfalfa-tools\segmentation-Spring2026
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
+
+## Unified UI
+
+Open another Command Prompt window and run:
+
+```cmd
+cd C:\Users\rusch051\alfalfa-tools\Alfalfa-Unified-UI
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
+
+# Running the Applications
+
+After the first-time setup is complete, you do NOT need to reinstall everything again.
+
+The next time you want to use the tools, simply open Command Prompt windows and run the applications below.
+
+---
+
+## Open Four Command Prompt Windows
 
 Press:
 
@@ -141,10 +161,10 @@ Repeat four times.
 
 ---
 
-#### Window 1: Fall 2025 Segmentation
+## Window 1 — Fall 2025 Segmentation
 
 ```cmd
-cd %USERPROFILE%\alfalfa-tools\segmentation-Fall2025
+cd C:\Users\rusch051\alfalfa-tools\segmentation-Fall2025
 .venv\Scripts\activate
 set PORT=7860
 python app.py
@@ -152,21 +172,21 @@ python app.py
 
 ---
 
-#### Window 2: Object Detection
+## Window 2 — Object Detection
 
 ```cmd
-cd %USERPROFILE%\alfalfa-tools\object-detection-Fall2025
+cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
 .venv\Scripts\activate
-set PORT=7861
-python app.py
+cd src\app
+python main.py
 ```
 
 ---
 
-#### Window 3: Spring 2026 Segmentation
+## Window 3 — Spring 2026 Segmentation
 
 ```cmd
-cd %USERPROFILE%\alfalfa-tools\segmentation-Spring2026
+cd C:\Users\rusch051\alfalfa-tools\segmentation-Spring2026
 .venv\Scripts\activate
 set PORT=7862
 python app.py
@@ -174,16 +194,16 @@ python app.py
 
 ---
 
-#### Window 4: Unified UI
+## Window 4 — Unified UI
 
 ```cmd
-cd %USERPROFILE%\alfalfa-tools\Alfalfa-Unified-UI
+cd C:\Users\rusch051\alfalfa-tools\Alfalfa-Unified-UI
 .venv\Scripts\activate
 set PORT=7863
 python app.py
 ```
 
-Open:
+Then open:
 
 ```text
 http://127.0.0.1:7863
@@ -191,7 +211,7 @@ http://127.0.0.1:7863
 
 ---
 
-### Step 7: Verify the Unified UI
+# Verify the Unified UI
 
 After opening the Unified UI:
 
@@ -201,9 +221,27 @@ After opening the Unified UI:
 
 ---
 
-### Common Issues
+# Common Issues
 
-#### Python is not recognized
+## Missing gradio package
+
+If you see:
+
+```text
+ModuleNotFoundError: No module named 'gradio'
+```
+
+run:
+
+```cmd
+pip install gradio
+```
+
+inside the affected repository folder, then try running the app again.
+
+---
+
+## Python is not recognized
 
 If Windows reports:
 
@@ -211,7 +249,9 @@ If Windows reports:
 python is not recognized
 ```
 
-Python was likely installed without enabling PATH. Reinstall Python and enable:
+Python was likely installed without enabling PATH.
+
+Reinstall Python and enable:
 
 ```text
 Add python.exe to PATH
@@ -219,7 +259,7 @@ Add python.exe to PATH
 
 ---
 
-#### Tool appears Offline
+## Tool appears Offline
 
 Make sure the corresponding tool is running:
 
@@ -230,35 +270,16 @@ Spring 2026 Segmentation → 7862
 Unified UI → 7863
 ```
 
-Then click **Refresh Status**.
+Then click:
+
+```text
+Refresh Status
+```
+
+inside the Unified UI.
 
 ---
 
-
----
-
-### Future Deployment Note
+# Future Deployment Note
 
 For long-term use, these tools can also be hosted on a centralized server or USDA computing environment. Once hosted, users would only need to access a web link instead of starting all applications locally.
-## Configuration
-
-The following environment variables override the default tool URLs without editing code:
-
-- `OBJECT_DETECTION_URL` — defaults to `http://127.0.0.1:7861`
-- `FALL_SEGMENTATION_URL` — defaults to `http://127.0.0.1:7860`
-- `SPRING_SEGMENTATION_URL` — defaults to `http://127.0.0.1:7862`
-
-The unified UI itself binds to `127.0.0.1:7863` by default. Override with the `HOST` and `PORT` environment variables if needed.
-
-## Project Clients
-
-- Dr. D. Jo Heuschele — Research Agronomist, USDA ARS
-- Dr. Hannah Rusch — Researcher, University of Minnesota
-
-## Notes for Future Teams
-
-- This repo is a launcher, not a model repo.
-- Do not duplicate model code here.
-- Keep tools modular.
-- Update ports carefully.
-- Keep UI simple and maintainable.
