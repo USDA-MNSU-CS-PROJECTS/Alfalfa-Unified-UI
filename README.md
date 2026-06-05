@@ -110,7 +110,7 @@ Open a new Command Prompt window and run:
 cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
 python -m venv .venv
 .venv\Scripts\activate
-pip install -r src\app\requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
