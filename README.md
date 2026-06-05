@@ -177,7 +177,7 @@ python app.py
 ```cmd
 cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
 .venv\Scripts\activate
-cd src\app
+set PORT=7861
 python main.py
 ```
 
