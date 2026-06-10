@@ -223,13 +223,26 @@ After opening the Unified UI:
 
 # Common Issues
 
+<<<<<<< Updated upstream
 ## Missing gradio package
+=======
+Statuses refresh automatically every 10 seconds, so a tool that comes online (or goes offline) will update on its own without a page reload. Click *Refresh Status* to force an immediate re-check. Override the interval with the `STATUS_REFRESH_SECONDS` environment variable.
+
+## Configuration
+>>>>>>> Stashed changes
 
 If you see:
 
+<<<<<<< Updated upstream
 ```text
 ModuleNotFoundError: No module named 'gradio'
 ```
+=======
+- `OBJECT_DETECTION_URL` — defaults to `http://127.0.0.1:7861`
+- `FALL_SEGMENTATION_URL` — defaults to `http://127.0.0.1:7860`
+- `SPRING_SEGMENTATION_URL` — defaults to `http://127.0.0.1:7862`
+- `STATUS_REFRESH_SECONDS` — defaults to `10` (auto-refresh interval for the status pills)
+>>>>>>> Stashed changes
 
 run:
 
@@ -277,6 +290,14 @@ Refresh Status
 ```
 
 inside the Unified UI.
+
+The dashboard also re-checks each tool automatically every 10 seconds, so a tool that comes online will switch from **Offline** to **Online** on its own — no page reload needed. To change the interval, set the `STATUS_REFRESH_SECONDS` environment variable before launching the Unified UI:
+
+```cmd
+set STATUS_REFRESH_SECONDS=5
+set PORT=7863
+python app.py
+```
 
 ---
 

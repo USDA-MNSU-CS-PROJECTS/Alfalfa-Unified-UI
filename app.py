@@ -33,6 +33,9 @@ OBJECT_DETECTION_URL = _env("OBJECT_DETECTION_URL", "http://127.0.0.1:7861")
 FALL_SEGMENTATION_URL = _env("FALL_SEGMENTATION_URL", "http://127.0.0.1:7860")
 SPRING_SEGMENTATION_URL = _env("SPRING_SEGMENTATION_URL", "http://127.0.0.1:7862")
 
+# Seconds between automatic status re-checks. Override with the env var.
+STATUS_REFRESH_SECONDS = float(_env("STATUS_REFRESH_SECONDS", "10"))
+
 ORG = "USDA-MNSU-CS-PROJECTS"
 
 TOOLS: list[Tool] = [
@@ -205,6 +208,12 @@ def build_ui() -> gr.Blocks:
             refresh = gr.Button("Refresh Status", size="sm")
         refresh.click(fn=refresh_statuses, inputs=None, outputs=status_components)
 
+        # Auto-refresh: re-check each tool every STATUS_REFRESH_SECONDS so that
+        # tools coming online (or going offline) show the correct pill without
+        # the user clicking the button.
+        status_timer = gr.Timer(STATUS_REFRESH_SECONDS)
+        status_timer.tick(fn=refresh_statuses, inputs=None, outputs=status_components)
+
         with gr.Row(equal_height=True, elem_classes=["info-row"]):
             _info_card(
                 "Quick Start",
@@ -226,7 +235,8 @@ def build_ui() -> gr.Blocks:
                 "- **Online** — the tool's local URL responded.\n"
                 "- **Offline** means the individual tool is not currently "
                 "running on its expected local port.\n\n"
-                "Click *Refresh Status* after starting or stopping a tool.",
+                f"Statuses refresh automatically every {int(STATUS_REFRESH_SECONDS)} "
+                "seconds. Click *Refresh Status* to re-check immediately.",
             )
             _info_card(
                 "Notes for Future Teams",
