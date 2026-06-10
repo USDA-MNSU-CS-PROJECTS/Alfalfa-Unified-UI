@@ -108,8 +108,10 @@ Open a new Command Prompt window and run:
 
 ```cmd
 cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
+git pull
 python -m venv .venv
 .venv\Scripts\activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
