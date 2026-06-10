@@ -180,6 +180,7 @@ python app.py
 cd C:\Users\rusch051\alfalfa-tools\object-detection-Fall2025
 .venv\Scripts\activate
 set PORT=7861
+cd src\app
 python main.py
 ```
 
